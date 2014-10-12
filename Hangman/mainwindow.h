@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsScene>
+
+#include "dataManager.h"
 
 namespace Ui {
 class MainWindow;
@@ -22,8 +25,14 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    DataManager dataManager;
+
+    QGraphicsScene *scene;
+    QFont *font;
 
     void updateAttemptedList(QChar input);
+
+    void setGraphicsScene();
 };
 
 #endif // MAINWINDOW_H
