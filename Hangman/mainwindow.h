@@ -22,6 +22,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    void updateAttemptedList(QChar input);
 };
 
 #endif // MAINWINDOW_H
