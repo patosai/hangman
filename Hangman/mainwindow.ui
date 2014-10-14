@@ -82,26 +82,13 @@
      <property name="geometry">
       <rect>
        <x>330</x>
-       <y>30</y>
+       <y>40</y>
        <width>91</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
       <string>I don't know :(</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="buttonNew">
-     <property name="geometry">
-      <rect>
-       <x>340</x>
-       <y>60</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>New word!</string>
      </property>
     </widget>
    </widget>
@@ -136,6 +123,12 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuChoose_Word_List">
+    <property name="title">
+     <string>Choose Word List</string>
+    </property>
+   </widget>
+   <addaction name="menuChoose_Word_List"/>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

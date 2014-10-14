@@ -10,7 +10,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     scene = new QGraphicsScene();
 
-    font = new QFont();
+    font = new QFont("Monospace");
+    font->setStyleHint(QFont::TypeWriter);
     font->setPointSize(42);
     font->setUnderline(true);
     scene->addText(dataManager.getDisplayWord(), *font);
@@ -29,7 +30,8 @@ MainWindow::~MainWindow()
  *  Input methods                   *
  ************************************/
 
-// Enter button - redirects to below function
+// Enter button, alternative for pressing enter key
+// Redirects to below function
 void MainWindow::on_buttonEnter_clicked()
 {
     on_inputChar_returnPressed();
@@ -47,9 +49,6 @@ void MainWindow::on_inputChar_returnPressed()
         ui->inputChar->setText("");
     }
 }
-
-// Updates string in graphics scene
-
 
 /************************************
  *  Display methods                 *
