@@ -9,11 +9,15 @@ class DataManager
 {
 public:
     DataManager();
+
     void charAdd(const QChar& input);
-    QString getString();
+    QString getAttemptedLetters();
+    QString getWord();
+    QString getDisplayWord();
 
 private:
     std::vector<QChar> attemptedChars;
+    QString word;
 };
 
 #endif // DATAMANAGER_H

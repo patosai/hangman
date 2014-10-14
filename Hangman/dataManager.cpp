@@ -4,7 +4,7 @@
 
 DataManager::DataManager()
 {
-
+    word = "HELLO";
 }
 
 // Binary search + add to QString
@@ -36,12 +36,40 @@ void DataManager::charAdd(const QChar& charInput)
     attemptedChars.push_back(input);
 }
 
-QString DataManager::getString()
+QString DataManager::getAttemptedLetters()
 {
     QString returnString;
     for (uint8_t i = 0; i < attemptedChars.size(); i++)
     {
         returnString += attemptedChars.at(i);
     }
+    return returnString;
+}
+
+QString DataManager::getWord()
+{
+    return word;
+}
+
+QString DataManager::getDisplayWord()
+{
+    QString returnString;
+
+    for (uint8_t i = 0; i < word.length(); i++)
+    {
+        bool found = false;
+        for (uint8_t j = 0; j < attemptedChars.size(); j++)
+        {
+            if (word.at(i) == attemptedChars.at(j))
+            {
+                returnString += attemptedChars.at(j);
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+            returnString += " ";
+    }
+
     return returnString;
 }

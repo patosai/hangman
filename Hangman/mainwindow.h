@@ -30,9 +30,7 @@ private:
     QGraphicsScene *scene;
     QFont *font;
 
-    void updateAttemptedList(QChar input);
-
-    void setGraphicsScene();
+    void update(QChar input);
 };
 
 #endif // MAINWINDOW_H

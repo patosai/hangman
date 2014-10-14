@@ -7,7 +7,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setGraphicsScene();
+
+    scene = new QGraphicsScene();
+
+    font = new QFont();
+    font->setPointSize(42);
+    font->setUnderline(true);
+    scene->addText(dataManager.getDisplayWord(), *font);
+
+    ui->graphicsView->setScene(scene);
 }
 
 MainWindow::~MainWindow()
@@ -21,43 +29,43 @@ MainWindow::~MainWindow()
  *  Input methods                   *
  ************************************/
 
-// Enter button - redirects to enter key pressed on line edit
+// Enter button - redirects to below function
 void MainWindow::on_buttonEnter_clicked()
 {
     on_inputChar_returnPressed();
 }
 
-// Line edit enter function
+// Character guess enter function
 void MainWindow::on_inputChar_returnPressed()
 {
     if (ui->inputChar->text() != "")
     {
         QChar input = ui->inputChar->text().at(0);
         ui->attemptedChars->setText(input);
-        updateAttemptedList(input);
+        update(input);
 
         ui->inputChar->setText("");
     }
 }
 
+// Updates string in graphics scene
+
+
 /************************************
  *  Display methods                 *
  ************************************/
-void MainWindow::updateAttemptedList(QChar input)
+
+void MainWindow::update(QChar input)
 {
+    // Add input character to database
     dataManager.charAdd(input);
 
-    ui->attemptedChars->setText(dataManager.getString());
+    // Update attempted character box
+    ui->attemptedChars->setText(dataManager.getAttemptedLetters());
+
+    // Redraw big box to display word
+    scene->clear();
+    scene->addText(dataManager.getDisplayWord(), *font);
 }
 
-void MainWindow::setGraphicsScene()
-{
-    scene = new QGraphicsScene();
 
-    font = new QFont();
-    font->setPointSize(42);
-    font->setUnderline(true);
-    scene->addText("testing", *font);
-
-    ui->graphicsView->setScene(scene);
-}
