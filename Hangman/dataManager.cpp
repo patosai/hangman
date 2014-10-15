@@ -4,7 +4,7 @@
 
 DataManager::DataManager()
 {
-    word = "HELLO";
+    word = "MAN-OF-WAR";
 }
 
 // Binary search + add to QString
@@ -67,7 +67,9 @@ QString DataManager::getDisplayWord()
                 break;
             }
         }
-        if (!found)
+        if (word.at(i) == '-')
+            returnString += "-";
+        else if (!found)
             returnString += " ";
     }
 
