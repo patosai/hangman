@@ -91,6 +91,19 @@
       <string>I don't know :(</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="buttonNewWord">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>70</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>New word!</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">

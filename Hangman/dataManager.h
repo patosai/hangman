@@ -11,6 +11,7 @@ public:
     DataManager();
 
     void charAdd(const QChar& input);
+    void getNewWord();
     QString getAttemptedLetters();
     QString getWord();
     QString getDisplayWord();

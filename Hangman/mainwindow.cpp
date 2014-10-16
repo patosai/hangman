@@ -50,6 +50,14 @@ void MainWindow::on_inputChar_returnPressed()
     }
 }
 
+void MainWindow::on_buttonNewWord_clicked()
+{
+    dataManager.getNewWord();
+    scene->clear();
+    scene->addText(dataManager.getDisplayWord(), *font);
+}
+
+
 /************************************
  *  Display methods                 *
  ************************************/

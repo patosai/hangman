@@ -1,5 +1,7 @@
 #include "dataManager.h"
 
+#include <QFile>
+
 #include <stdint.h> // uint8_t
 
 DataManager::DataManager()
@@ -70,8 +72,16 @@ QString DataManager::getDisplayWord()
         if (word.at(i) == '-')
             returnString += "-";
         else if (!found)
+        {
             returnString += " ";
+        }
     }
 
     return returnString;
+}
+
+void DataManager::getNewWord()
+{
+    QString inputFile = "dictionary.txt";
+    QFile fileStream(inputFile);
 }

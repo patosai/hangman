@@ -23,6 +23,8 @@ private slots:
 
     void on_inputChar_returnPressed();
 
+    void on_buttonNewWord_clicked();
+
 private:
     Ui::MainWindow *ui;
     DataManager dataManager;
