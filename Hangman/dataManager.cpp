@@ -107,12 +107,11 @@ QString DataManager::getDisplayWord()
     }
 
     return returnString;
-
-    return word;
 }
 
 void DataManager::getNewWord()
 {
     int randomIndex = rand() % wordList.size();
     word = wordList.at(randomIndex);
+    attemptedChars.clear();
 }

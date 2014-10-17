@@ -55,6 +55,7 @@ void MainWindow::on_buttonNewWord_clicked()
     dataManager.getNewWord();
     scene->clear();
     scene->addText(dataManager.getDisplayWord(), *font);
+    ui->attemptedChars->setText("");
 }
 
 
