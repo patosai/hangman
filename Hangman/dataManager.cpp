@@ -1,12 +1,21 @@
 #include "dataManager.h"
 
 #include <QFile>
+#include <QFileDialog>
+#include <QIODevice>
+#include <QMessageBox>
+#include <QTextStream>
 
 #include <stdint.h> // uint8_t
 
 DataManager::DataManager()
 {
-    word = "MAN-OF-WAR";
+    QString path = QFileDialog::getOpenFileName();
+    if ( !path.isNull() )
+    {
+        fillWordList(path);
+    }
+    getNewWord();
 }
 
 // Binary search + add to QString
@@ -36,6 +45,26 @@ void DataManager::charAdd(const QChar& charInput)
 
     // If the character is to be placed at end of vector
     attemptedChars.push_back(input);
+}
+
+void DataManager::fillWordList(QString fileName)
+{
+    QString temp;
+    QFile fileStream(fileName);
+    if (!fileStream.open(QIODevice::ReadOnly))
+    {
+        QMessageBox::information(0, "File Error", fileStream.errorString());
+        return;
+    }
+    QTextStream textStream(&fileStream);
+    textStream >> temp;
+    while (!textStream.atEnd())
+    {
+        temp = temp.toUpper();
+        wordList.push_back(temp);
+        textStream >> temp;
+    }
+    fileStream.close();
 }
 
 QString DataManager::getAttemptedLetters()
@@ -78,10 +107,12 @@ QString DataManager::getDisplayWord()
     }
 
     return returnString;
+
+    return word;
 }
 
 void DataManager::getNewWord()
 {
-    QString inputFile = "dictionary.txt";
-    QFile fileStream(inputFile);
+    int randomIndex = rand() % wordList.size();
+    word = wordList.at(randomIndex);
 }

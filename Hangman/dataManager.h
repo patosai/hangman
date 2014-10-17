@@ -11,12 +11,14 @@ public:
     DataManager();
 
     void charAdd(const QChar& input);
+    void fillWordList(QString fileName);
     void getNewWord();
     QString getAttemptedLetters();
     QString getWord();
     QString getDisplayWord();
 
 private:
+    std::vector<QString> wordList;
     std::vector<QChar> attemptedChars;
     QString word;
 };
