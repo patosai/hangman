@@ -16,8 +16,11 @@ public:
     QString getAttemptedLetters();
     QString getWord();
     QString getDisplayWord();
+    void giveUp();
+    bool hasGivenUp();
 
 private:
+    bool showWord;
     std::vector<QString> wordList;
     std::vector<QChar> attemptedChars;
     QString word;

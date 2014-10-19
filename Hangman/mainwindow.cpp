@@ -42,10 +42,12 @@ void MainWindow::on_inputChar_returnPressed()
 {
     if (ui->inputChar->text() != "")
     {
+        // Get character from box
         QChar input = ui->inputChar->text().at(0);
         ui->attemptedChars->setText(input);
         update(input);
 
+        // Reset input box
         ui->inputChar->setText("");
     }
 }
@@ -58,6 +60,11 @@ void MainWindow::on_buttonNewWord_clicked()
     ui->attemptedChars->setText("");
 }
 
+void MainWindow::on_buttonResign_clicked()
+{
+    dataManager.giveUp();
+    redrawWord();
+}
 
 /************************************
  *  Display methods                 *
@@ -65,15 +72,26 @@ void MainWindow::on_buttonNewWord_clicked()
 
 void MainWindow::update(QChar input)
 {
-    // Add input character to database
-    dataManager.charAdd(input);
+    if (!dataManager.hasGivenUp())
+    {
+        // Add input character to database
+        dataManager.charAdd(input);
 
+        // Redraw stuff
+        redrawAttemptedCharBox();
+        redrawWord();
+    }
+}
+
+void MainWindow::redrawAttemptedCharBox()
+{
     // Update attempted character box
     ui->attemptedChars->setText(dataManager.getAttemptedLetters());
+}
 
+void MainWindow::redrawWord()
+{
     // Redraw big box to display word
     scene->clear();
     scene->addText(dataManager.getDisplayWord(), *font);
 }
-
-

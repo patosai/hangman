@@ -25,6 +25,8 @@ private slots:
 
     void on_buttonNewWord_clicked();
 
+    void on_buttonResign_clicked();
+
 private:
     Ui::MainWindow *ui;
     DataManager dataManager;
@@ -32,6 +34,8 @@ private:
     QGraphicsScene *scene;
     QFont *font;
 
+    void redrawAttemptedCharBox();
+    void redrawWord();
     void update(QChar input);
 };
 

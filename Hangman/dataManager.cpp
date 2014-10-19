@@ -10,12 +10,18 @@
 
 DataManager::DataManager()
 {
+    showWord = false;
+
     QString path = QFileDialog::getOpenFileName();
     if ( !path.isNull() )
     {
         fillWordList(path);
+        getNewWord();
     }
-    getNewWord();
+    else
+    {
+        word = "ERROR";
+    }
 }
 
 // Binary search + add to QString
@@ -84,6 +90,8 @@ QString DataManager::getWord()
 
 QString DataManager::getDisplayWord()
 {
+    if (showWord) return word;
+
     QString returnString;
 
     for (uint8_t i = 0; i < word.length(); i++)
@@ -114,4 +122,14 @@ void DataManager::getNewWord()
     int randomIndex = rand() % wordList.size();
     word = wordList.at(randomIndex);
     attemptedChars.clear();
+}
+
+void DataManager::giveUp()
+{
+    showWord = true;
+}
+
+bool DataManager::hasGivenUp()
+{
+    return showWord;
 }
