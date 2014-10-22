@@ -133,3 +133,9 @@ bool DataManager::hasGivenUp()
 {
     return showWord;
 }
+
+void DataManager::reset()
+{
+    getNewWord();
+    showWord = false;
+}

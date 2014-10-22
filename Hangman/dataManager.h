@@ -18,6 +18,7 @@ public:
     QString getDisplayWord();
     void giveUp();
     bool hasGivenUp();
+    void reset();
 
 private:
     bool showWord;

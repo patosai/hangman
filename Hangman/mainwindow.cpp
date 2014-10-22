@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     scene = new QGraphicsScene();
 
-    font = new QFont("Monospace");
+    font = new QFont("Courier");
     font->setStyleHint(QFont::TypeWriter);
     font->setPointSize(42);
     font->setUnderline(true);
@@ -54,7 +54,7 @@ void MainWindow::on_inputChar_returnPressed()
 
 void MainWindow::on_buttonNewWord_clicked()
 {
-    dataManager.getNewWord();
+    dataManager.reset(); // resets data manager and gets new word
     scene->clear();
     scene->addText(dataManager.getDisplayWord(), *font);
     ui->attemptedChars->setText("");
