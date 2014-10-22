@@ -40,15 +40,18 @@ void MainWindow::on_buttonEnter_clicked()
 // Character guess enter function
 void MainWindow::on_inputChar_returnPressed()
 {
-    if (ui->inputChar->text() != "")
+    if (!dataManager.hasGivenUp())
     {
-        // Get character from box
-        QChar input = ui->inputChar->text().at(0);
-        ui->attemptedChars->setText(input);
-        update(input);
+        if (ui->inputChar->text() != "")
+        {
+            // Get character from box
+            QChar input = ui->inputChar->text().at(0);
+            ui->attemptedChars->setText(input);
+            update(input);
 
-        // Reset input box
-        ui->inputChar->setText("");
+            // Reset input box
+            ui->inputChar->setText("");
+        }
     }
 }
 
@@ -58,6 +61,8 @@ void MainWindow::on_buttonNewWord_clicked()
     scene->clear();
     scene->addText(dataManager.getDisplayWord(), *font);
     ui->attemptedChars->setText("");
+    ui->inputChar->setText("");
+    redrawNumAttempts();
 }
 
 void MainWindow::on_buttonResign_clicked()
@@ -80,6 +85,7 @@ void MainWindow::update(QChar input)
         // Redraw stuff
         redrawAttemptedCharBox();
         redrawWord();
+        redrawNumAttempts();
     }
 }
 
@@ -94,4 +100,10 @@ void MainWindow::redrawWord()
     // Redraw big box to display word
     scene->clear();
     scene->addText(dataManager.getDisplayWord(), *font);
+}
+
+void MainWindow::redrawNumAttempts()
+{
+    ui->labelNumAttempts->setText("Total Attempts: " + QString::number(dataManager.getNumAttempts()));
+
 }

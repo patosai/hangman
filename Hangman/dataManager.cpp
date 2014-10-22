@@ -10,6 +10,7 @@
 
 DataManager::DataManager()
 {
+    numAttempts = 0;
     showWord = false;
 
     QString path = QFileDialog::getOpenFileName();
@@ -45,12 +46,14 @@ void DataManager::charAdd(const QChar& charInput)
         if (input < *it)
         {
             attemptedChars.insert(it, input);
+            numAttempts++;
             return;
         }
     }
 
     // If the character is to be placed at end of vector
     attemptedChars.push_back(input);
+    numAttempts++;
 }
 
 void DataManager::fillWordList(QString fileName)
@@ -134,8 +137,14 @@ bool DataManager::hasGivenUp()
     return showWord;
 }
 
+int DataManager::getNumAttempts()
+{
+    return numAttempts;
+}
+
 void DataManager::reset()
 {
+    numAttempts = 0;
     getNewWord();
     showWord = false;
 }

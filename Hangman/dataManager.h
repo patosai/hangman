@@ -14,6 +14,7 @@ public:
     void fillWordList(QString fileName);
     void getNewWord();
     QString getAttemptedLetters();
+    int getNumAttempts();
     QString getWord();
     QString getDisplayWord();
     void giveUp();
@@ -21,6 +22,7 @@ public:
     void reset();
 
 private:
+    int numAttempts;
     bool showWord;
     std::vector<QString> wordList;
     std::vector<QChar> attemptedChars;
