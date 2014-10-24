@@ -23,6 +23,8 @@ DataManager::DataManager()
     {
         word = "ERROR";
     }
+
+    numAttemptsLeft = 3 + int(word.size()/26.0 * 10);
 }
 
 // Binary search + add to QString
@@ -47,6 +49,7 @@ void DataManager::charAdd(const QChar& charInput)
         {
             attemptedChars.insert(it, input);
             numAttempts++;
+            updateAttemptsLeft(input);
             return;
         }
     }
@@ -54,6 +57,8 @@ void DataManager::charAdd(const QChar& charInput)
     // If the character is to be placed at end of vector
     attemptedChars.push_back(input);
     numAttempts++;
+
+    updateAttemptsLeft(input);
 }
 
 void DataManager::fillWordList(QString fileName)
@@ -142,9 +147,29 @@ int DataManager::getNumAttempts()
     return numAttempts;
 }
 
+int DataManager::getAttemptsLeft()
+{
+    return numAttemptsLeft;
+}
+
 void DataManager::reset()
 {
     numAttempts = 0;
     getNewWord();
     showWord = false;
+}
+
+void DataManager::updateAttemptsLeft(QChar input)
+{
+    // Check if character is not in word
+    bool remove = true;
+    for (int i = 0; i < word.size(); i++)
+    {
+        if (word.at(i) == input)
+        {
+            remove = false;
+        }
+    }
+    if (remove)
+        numAttemptsLeft--;
 }

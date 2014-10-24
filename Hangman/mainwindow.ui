@@ -137,6 +137,19 @@
       <string>Total Attempts: 0</string>
      </property>
     </widget>
+    <widget class="QLabel" name="labelAttemptsLeft">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>160</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Attempts Left:</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>

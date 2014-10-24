@@ -17,6 +17,9 @@ MainWindow::MainWindow(QWidget *parent) :
     scene->addText(dataManager.getDisplayWord(), *font);
 
     ui->graphicsView->setScene(scene);
+
+    redrawNumAttempts();
+    redrawNumAttemptsLeft();
 }
 
 MainWindow::~MainWindow()
@@ -63,6 +66,7 @@ void MainWindow::on_buttonNewWord_clicked()
     ui->attemptedChars->setText("");
     ui->inputChar->setText("");
     redrawNumAttempts();
+    redrawNumAttemptsLeft();
 }
 
 void MainWindow::on_buttonResign_clicked()
@@ -86,6 +90,7 @@ void MainWindow::update(QChar input)
         redrawAttemptedCharBox();
         redrawWord();
         redrawNumAttempts();
+        redrawNumAttemptsLeft();
     }
 }
 
@@ -106,4 +111,9 @@ void MainWindow::redrawNumAttempts()
 {
     ui->labelNumAttempts->setText("Total Attempts: " + QString::number(dataManager.getNumAttempts()));
 
+}
+
+void MainWindow::redrawNumAttemptsLeft()
+{
+    ui->labelAttemptsLeft->setText("Attempts left: " + QString::number(dataManager.getAttemptsLeft()));
 }

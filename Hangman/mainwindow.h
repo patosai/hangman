@@ -37,6 +37,7 @@ private:
     void redrawAttemptedCharBox();
     void redrawWord();
     void redrawNumAttempts();
+    void redrawNumAttemptsLeft();
     void update(QChar input);
 };
 
