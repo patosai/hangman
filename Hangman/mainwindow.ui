@@ -88,20 +88,33 @@
       </rect>
      </property>
      <property name="text">
-      <string>I don't know :(</string>
+      <string>Give me the answer!</string>
      </property>
     </widget>
     <widget class="QPushButton" name="buttonNewWord">
      <property name="geometry">
       <rect>
-       <x>310</x>
+       <x>300</x>
        <y>70</y>
-       <width>101</width>
+       <width>121</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
       <string>New word!</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonHint">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>10</y>
+       <width>121</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Give me a hint!</string>
      </property>
     </widget>
    </widget>
@@ -164,11 +177,29 @@
    </property>
    <widget class="QMenu" name="menuChoose_Word_List">
     <property name="title">
-     <string>Choose Word List</string>
+     <string>Menu</string>
     </property>
+    <addaction name="actionChoose_New_Word_List"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuChoose_Word_List"/>
+   <addaction name="menuAbout"/>
   </widget>
+  <action name="actionChoose_New_Word_List">
+   <property name="text">
+    <string>Choose New Word List</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

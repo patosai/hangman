@@ -10,7 +10,7 @@ class DataManager
 public:
     DataManager();
 
-    void charAdd(const QChar& input);
+    void charAdd(const QChar& input, bool b = true);
     void fillWordList(QString fileName);
     void getNewWord();
     QString getAttemptedLetters();
@@ -22,6 +22,10 @@ public:
     void giveUp();
     bool hasGivenUp();
     void reset();
+    void getHint();
+    bool hasBeenGuessed(const QChar& input);
+
+    void resetNumAttempted();
 
 private:
     int numAttempts, numAttemptsLeft;
@@ -29,6 +33,7 @@ private:
     std::vector<QString> wordList;
     std::vector<QChar> attemptedChars;
     QString word;
+
 };
 
 #endif // DATAMANAGER_H

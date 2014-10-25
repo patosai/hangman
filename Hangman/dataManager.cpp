@@ -24,11 +24,11 @@ DataManager::DataManager()
         word = "ERROR";
     }
 
-    numAttemptsLeft = 3 + int(word.size()/26.0 * 10);
+    resetNumAttempted();
 }
 
 // Binary search + add to QString
-void DataManager::charAdd(const QChar& charInput)
+void DataManager::charAdd(const QChar& charInput, bool b)
 {
     // Check if character is valid (A-Z)
     if ( !charInput.isLetter() )
@@ -49,7 +49,8 @@ void DataManager::charAdd(const QChar& charInput)
         {
             attemptedChars.insert(it, input);
             numAttempts++;
-            updateAttemptsLeft(input);
+            if (b)
+                updateAttemptsLeft(input);
             return;
         }
     }
@@ -58,7 +59,8 @@ void DataManager::charAdd(const QChar& charInput)
     attemptedChars.push_back(input);
     numAttempts++;
 
-    updateAttemptsLeft(input);
+    if (b)
+        updateAttemptsLeft(input);
 }
 
 void DataManager::fillWordList(QString fileName)
@@ -155,6 +157,7 @@ int DataManager::getAttemptsLeft()
 void DataManager::reset()
 {
     numAttempts = 0;
+    resetNumAttempted();
     getNewWord();
     showWord = false;
 }
@@ -172,4 +175,34 @@ void DataManager::updateAttemptsLeft(QChar input)
     }
     if (remove)
         numAttemptsLeft--;
+
+    if (numAttemptsLeft <= 0)
+        giveUp();
+}
+
+void DataManager::resetNumAttempted()
+{
+    numAttemptsLeft = 5 + int(word.size()/26.0 * 10);
+}
+
+void DataManager::getHint()
+{
+    QChar hintChar;
+    do
+    {
+        hintChar= QChar('A' + char(qrand() % ('Z' - 'A')));
+    } while (hasBeenGuessed(hintChar) || word.indexOf(hintChar) == -1);
+    charAdd(hintChar, false);
+}
+
+bool DataManager::hasBeenGuessed(const QChar& input)
+{
+    for (uint8_t j = 0; j < attemptedChars.size(); j++)
+    {
+        if (input == attemptedChars.at(j))
+        {
+            return true;
+        }
+    }
+    return false;
 }

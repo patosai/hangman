@@ -75,6 +75,14 @@ void MainWindow::on_buttonResign_clicked()
     redrawWord();
 }
 
+void MainWindow::on_buttonHint_clicked()
+{
+    dataManager.getHint();
+    // Redraw stuff
+    redrawAttemptedCharBox();
+    redrawWord();
+}
+
 /************************************
  *  Display methods                 *
  ************************************/

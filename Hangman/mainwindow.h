@@ -27,6 +27,8 @@ private slots:
 
     void on_buttonResign_clicked();
 
+    void on_buttonHint_clicked();
+
 private:
     Ui::MainWindow *ui;
     DataManager dataManager;
