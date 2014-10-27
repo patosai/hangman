@@ -2,10 +2,20 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QFile>
+#include <QFileDialog>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    QString path = QFileDialog::getOpenFileName();
+    if ( !path.isNull() )
+    {
+        dataManager = new DataManager(path);
+        dataManager->getNewWord();
+    }
+
     ui->setupUi(this);
 
     scene = new QGraphicsScene();
@@ -14,7 +24,30 @@ MainWindow::MainWindow(QWidget *parent) :
     font->setStyleHint(QFont::TypeWriter);
     font->setPointSize(42);
     font->setUnderline(true);
-    scene->addText(dataManager.getDisplayWord(), *font);
+    scene->addText(dataManager->getDisplayWord(), *font);
+
+    ui->graphicsView->setScene(scene);
+
+    redrawNumAttempts();
+    redrawNumAttemptsLeft();
+}
+
+MainWindow::MainWindow(const QString& path, QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+    dataManager = new DataManager(path);
+    dataManager->getNewWord();
+
+    ui->setupUi(this);
+
+    scene = new QGraphicsScene();
+
+    font = new QFont("Courier");
+    font->setStyleHint(QFont::TypeWriter);
+    font->setPointSize(42);
+    font->setUnderline(true);
+    scene->addText(dataManager->getDisplayWord(), *font);
 
     ui->graphicsView->setScene(scene);
 
@@ -27,6 +60,7 @@ MainWindow::~MainWindow()
     delete font;
     delete scene;
     delete ui;
+    delete dataManager;
 }
 
 /************************************
@@ -43,7 +77,7 @@ void MainWindow::on_buttonEnter_clicked()
 // Character guess enter function
 void MainWindow::on_inputChar_returnPressed()
 {
-    if (!dataManager.hasGivenUp())
+    if (!dataManager->hasGivenUp())
     {
         if (ui->inputChar->text() != "")
         {
@@ -60,9 +94,9 @@ void MainWindow::on_inputChar_returnPressed()
 
 void MainWindow::on_buttonNewWord_clicked()
 {
-    dataManager.reset(); // resets data manager and gets new word
+    dataManager->reset(); // resets data manager and gets new word
     scene->clear();
-    scene->addText(dataManager.getDisplayWord(), *font);
+    scene->addText(dataManager->getDisplayWord(), *font);
     ui->attemptedChars->setText("");
     ui->inputChar->setText("");
     redrawNumAttempts();
@@ -71,13 +105,13 @@ void MainWindow::on_buttonNewWord_clicked()
 
 void MainWindow::on_buttonResign_clicked()
 {
-    dataManager.giveUp();
+    dataManager->giveUp();
     redrawWord();
 }
 
 void MainWindow::on_buttonHint_clicked()
 {
-    dataManager.getHint();
+    dataManager->getHint();
     // Redraw stuff
     redrawAttemptedCharBox();
     redrawWord();
@@ -89,10 +123,10 @@ void MainWindow::on_buttonHint_clicked()
 
 void MainWindow::update(QChar input)
 {
-    if (!dataManager.hasGivenUp())
+    if (!dataManager->hasGivenUp())
     {
         // Add input character to database
-        dataManager.charAdd(input);
+        dataManager->charAdd(input);
 
         // Redraw stuff
         redrawAttemptedCharBox();
@@ -105,23 +139,23 @@ void MainWindow::update(QChar input)
 void MainWindow::redrawAttemptedCharBox()
 {
     // Update attempted character box
-    ui->attemptedChars->setText(dataManager.getAttemptedLetters());
+    ui->attemptedChars->setText(dataManager->getAttemptedLetters());
 }
 
 void MainWindow::redrawWord()
 {
     // Redraw big box to display word
     scene->clear();
-    scene->addText(dataManager.getDisplayWord(), *font);
+    scene->addText(dataManager->getDisplayWord(), *font);
 }
 
 void MainWindow::redrawNumAttempts()
 {
-    ui->labelNumAttempts->setText("Total Attempts: " + QString::number(dataManager.getNumAttempts()));
+    ui->labelNumAttempts->setText("Total Attempts: " + QString::number(dataManager->getNumAttempts()));
 
 }
 
 void MainWindow::redrawNumAttemptsLeft()
 {
-    ui->labelAttemptsLeft->setText("Attempts left: " + QString::number(dataManager.getAttemptsLeft()));
+    ui->labelAttemptsLeft->setText("Attempts left: " + QString::number(dataManager->getAttemptsLeft()));
 }

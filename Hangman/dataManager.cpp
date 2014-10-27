@@ -1,28 +1,18 @@
 #include "dataManager.h"
 
 #include <QFile>
-#include <QFileDialog>
 #include <QIODevice>
 #include <QMessageBox>
 #include <QTextStream>
 
 #include <stdint.h> // uint8_t
 
-DataManager::DataManager()
+DataManager::DataManager(QString dictionary)
 {
     numAttempts = 0;
     showWord = false;
 
-    QString path = QFileDialog::getOpenFileName();
-    if ( !path.isNull() )
-    {
-        fillWordList(path);
-        getNewWord();
-    }
-    else
-    {
-        word = "ERROR";
-    }
+    fillWordList(dictionary);
 
     resetNumAttempted();
 }

@@ -8,7 +8,7 @@
 class DataManager
 {
 public:
-    DataManager();
+    DataManager(QString dictionary);
 
     void charAdd(const QChar& input, bool b = true);
     void fillWordList(QString fileName);

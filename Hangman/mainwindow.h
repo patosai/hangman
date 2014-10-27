@@ -16,6 +16,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(const QString& path, QWidget *parent = 0);
     ~MainWindow();
 
 private slots:
@@ -31,7 +32,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    DataManager dataManager;
+    DataManager *dataManager;
 
     QGraphicsScene *scene;
     QFont *font;
