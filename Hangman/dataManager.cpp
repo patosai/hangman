@@ -177,6 +177,28 @@ void DataManager::resetNumAttempted()
 
 void DataManager::getHint()
 {
+    //Check if word has been completely guessed already
+    if (showWord) return;
+
+    uint8_t charCounter = 0;
+    for (uint8_t i = 0; i < word.size(); i++)
+    {
+        for (uint8_t j = 0; j < attemptedChars.size(); j++)
+        {
+            if (word.at(i) == attemptedChars.at(j) || word.at(i) == '-')
+            {
+                charCounter++;
+                break;
+            }
+        }
+    }
+    if (charCounter >= word.size()) {
+        showWord = true;
+        return;
+    }
+
+    //Do the hint
+
     QChar hintChar;
     do
     {
