@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    QString path = QFileDialog::getOpenFileName();
+    QString path = QFileDialog::getOpenFileName(this, tr("Open Dictionary File"));
     if ( !path.isNull() )
     {
         dataManager = new DataManager(path);
